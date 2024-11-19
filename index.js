@@ -4,8 +4,7 @@ async function memo() {
     const page = await logseq.Editor.createPage(pageTitle, {
         createTime: new Date().toLocaleString(),
     }, { redirect: true });
-    const today = `[[${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}]]`
-    const first = await logseq.Editor.insertBlock(page.uuid, `#memo ${today}`)
+    const first = await logseq.Editor.insertBlock(page.uuid, `#memo`)
     logseq.Editor.insertBlock(first.uuid, "")
     logseq.App.showMsg(`Page "${pageTitle}" created.`);
 }
