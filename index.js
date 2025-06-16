@@ -1,5 +1,11 @@
+function generateRandomString(length) {
+    const characters = 'abcdefghijklmnopqrstuvwxyz';
+    return Array.from({ length }, () => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
+}
+
 async function memo() {
-    const pageTitle = `memo-${Date.now()}`;
+    const id = generateRandomString(5);
+    const pageTitle = `memo-${id}`;
     const now = new Date()
     const page = await logseq.Editor.createPage(pageTitle, {
         createTime: new Date().toLocaleString(),
