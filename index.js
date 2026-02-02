@@ -10,9 +10,14 @@ async function memo() {
     const page = await logseq.Editor.createPage(pageTitle, {
         createTime: new Date().toLocaleString(),
     }, { redirect: true });
-    const first = await logseq.Editor.insertBlock(page.uuid, `#memo`)
+    const first = await logseq.Editor.insertBlock(page.uuid, `#memo ${lq_today_page_link_str()}`)
     logseq.Editor.insertBlock(first.uuid, "")
     logseq.App.showMsg(`Page "${pageTitle}" created.`);
+}
+
+function lq_today_page_link_str() {
+    const n = new Date()
+    return `[[${n.getFullYear()}-${(n.getMonth()+1).toString().padStart(2, '0') }-${(n.getDate()).toString().padStart(2, '0')} ]]`
 }
 
 function lq_now_str() {
@@ -20,6 +25,7 @@ function lq_now_str() {
     const now_str = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`
     return now_str
 }
+
 async function update_start() {
     const now_str = lq_now_str()
     const cur = await logseq.Editor.getCurrentBlock()
